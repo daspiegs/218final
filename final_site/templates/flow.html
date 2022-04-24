@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>PHYSICS 218 Final Project</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/styles.css">
+<script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
+</head>
+<body>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-center" style="max-width:1500px">
+  <img class="w3-image" src="../static/chaos.png" alt="branch" width="1500" height="600">
+  <div class="w3-dark-grey w3-display-middle w3-padding-large w3-border w3-wide w3-text-light-grey w3-center">
+    <h1 class="w3-hide-medium w3-hide-small w3-xxxlarge">Branched Flow</h1>
+    <h5 class="w3-hide-large" style="white-space:nowrap">Branched Flow</h5>
+    <h3 class="w3-hide-medium w3-hide-small">Kick and Drift Map</h3>
+  </div>
+</header>
+  
+<!-- Page content -->
+<div class="w3-content w3-padding-large w3-margin-top" id="portfolio">
+  
+  <div class="w3-grey w3-padding-large w3-padding-32 w3-margin-top" id="background">
+    <h2 class="w3-center" style="color:#FBDED8">Background</h2>
+    <hr>
+    <h4 class="w3-center" style="color:white">Sources</h4>
+    <p style="color:white">Please see <a href="https://physicstoday.scitation.org/doi/10.1063/PT.3.4902">Physics Today article on Branched Flow</a> by Eric Heller, 
+      Ragnar Fleischmann, and Tobias Kramer for background article. Original source code by Tobias Kramer
+      can be found <a href="https://github.com/tobiaskramer/branch">
+      here</a>. A brief introduction to branched flow can also be found <a href="https://www.blochbusters.com/learn-with-us/lecture-notes/branched-flow/">
+      here</a>.
+     </p>
+     <h4 class="w3-center" style="color:white">Useful Visuals</h4>
+    <p style="color:white">Some wikipedia images of kick and drift concept as well as ray tracing trajectories of branched flow. 
+      The manifolds shown in the kick and drift map stretch and fold while keeping total area constant. 
+      This forms cusps and stable regions with high concentration of trajectories forming the branches.
+     </p>
+    
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/KickNdriftWiki.png/1280px-KickNdriftWiki.png" alt="initial image" class="w3-image w3-margin-top" width="1000">
+ 
+  <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Branchedgifsm.gif" alt="initial image" style="transform:rotate(-90deg);position:relative; left:200px;" height="700">
+  
+  </div>
+
+<div class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top" id="first-form">
+    <h3 class="w3-center"> Edit input image (initial phase plane) </h3>
+    <hr>
+    <p>Enter appropriate values</p>
+  
+  
+    <form method="POST" action="#">
+      <div class="w3-section">
+        <label>number of bands: </label>
+        <input class="w3-input w3-border" type="text" name="nbands" name="nbands">
+      </div>
+      
+      <div class="w3-section">
+        <label>band spacing (number btwn 1 and 40/bandnumber) </label>
+        <input class="w3-input w3-border" type="text" name="spacing" id="spacing">
+      </div>
+      <div class="w3-section">
+        <label>color scheme no.(0=rainbow,1=greenblue,2=grayblues,3=autumn,4=purples)</label>
+        <input class="w3-input w3-border" type="text" name="color" id="color_scheme_i">
+      </div>
+      <button type="submit" value="Submit" class="w3-button w3-block w3-dark-grey" id="submit">Set As Input</button>
+    </form><br>
+  </div>
+  
+  <img src="/plt.png" alt="initial image" class="w3-image w3-margin-top" width="1000" height="500">
+  <div class="w3-light-grey w3-padding-large w3-padding-32 w3-margin-top" id="second-form">
+    <h3 class="w3-center">Set kick + drift deets</h3>
+    <hr>
+    <p> Instructions</p>
+
+    <form method="POST" action="#" enctype="multipart/form-data">
+      <div class="w3-section">
+        <label>Kick Amplitude (initial value = 0.025)</label>
+        <input class="w3-input w3-border" type="text" name="ka" id="ka">
+      </div>
+        
+      <div class="w3-section">
+        <label>Drift Period (initial value = 0.5) </label>
+        <input class="w3-input w3-border" type="text" name="dp" id="dp">
+      </div>
+      <button type="submit" value="Submit2" class="w3-button w3-block w3-dark-grey" id="submit2">kick it and drift it! (results take a while to show)</button>
+      <p style="color:#C12403;">If results do not show after page refresh, try clearing cache with command-shift-R (mac) or ctrl-f5 (windows or linux)</p>
+    </form><br>
+  </div>
+  
+ <style>
+.mySlides {display:none;}
+</style>
+  
+<div class="w3-display-container" style="max-width:2000px">
+  <img class="mySlides" src="/plt0.png" style="width:100%">
+  <img class="mySlides" src="/plt1.png" style="width:100%">
+  <img class="mySlides" src="/plt3.png" style="width:100%">
+  <img class="mySlides" src="/plt4.png" style="width:100%">
+  <img class="mySlides" src="/plt5.png" style="width:100%">
+  <img class="mySlides" src="/plt6.png" style="width:100%">
+  <!--{% if results %}
+            {% for img_name in results %}
+                  <img class="mySlides" src="{{ img_name }}" alt="{{ img_name }}" style="width:100%">
+            {% endfor %}
+    {% else %}
+        No results yet. Try adjusting parameters.
+    {% endif %}-->
+
+  <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+  <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+</div>
+  
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  x[slideIndex-1].style.display = "block";
+}
+  </script>
+  
+<!-- <script>
+var slider = document.getElementById("bRange");
+var output = document.getElementById("demobn");
+output.innerHTML = slider.value;
+
+slider.oninput = function() {
+  output.innerHTML = this.value;
+}
+</script>-->
+
+  
+<!-- End page content -->
+</div>
+
+</body>
+</html>
